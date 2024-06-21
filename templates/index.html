@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Quiz</h1>
+    <form action="{{ url_for('submit') }}" method="post">
+        <p>Question 1: What is your name?</p>
+        <input type="text" name="name" required>
+
+        <p>Question 2: What is your favorite color?</p>
+        <input type="radio" name="color" value="Red">Red
+        <input type="radio" name="color" value="Blue">Blue
+        <input type="radio" name="color" value="Green">Green
+
+        <p>Question 3: What is your favorite animal?</p>
+        <input type="radio" name="animal" value="Dog">Dog
+        <input type="radio" name="animal" value="Cat">Cat
+        <input type="radio" name="animal" value="Parrot">Parrot
+
+        <p>Question 4: Describe your hobbies or interests:</p>
+        <textarea name="hobbies" rows="4" cols="50"></textarea>
+
+        <button type="submit">Submit Answers</button>
+    </form>
+</body>
+</html>
