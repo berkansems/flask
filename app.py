@@ -17,25 +17,39 @@ def init_db():
     conn.close()
 
 
+
+
+def get_max_score():
+    conn = sqlite3.connect('quiz.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT MAX(score) FROM results')
+    max_score = cursor.fetchone()[0]
+    conn.close()
+    return max_score if max_score is not None else 0
+
 @app.route('/')
 def index():
-    return render_template('index.html')
-
+    max_score = get_max_score()
+    return render_template('index.html', max_score=max_score)
 
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
         name = request.form['name']
-        color = request.form['color']
-        animal = request.form['animal']
-        hobbies = request.form['hobbies']
+        answers = {
+            'first': request.form.get('first'),
+            'second': request.form.get('second'),
+            'third': request.form.get('third')
+        }
 
-        # Skor hesaplama (örneğin)
-        score = 0
-        if color == 'Blue':
-            score += 1
-        if animal == 'Cat':
-            score += 1
+        correct_answers = {
+            'first': '1',
+            'second': '2',
+            'third': '3'
+        }
+
+        # Calculate the score
+        score = sum(1 for key in answers if answers[key] == correct_answers[key])
 
         conn = sqlite3.connect('quiz.db')
         cursor = conn.cursor()
@@ -53,7 +67,8 @@ def submit():
 def result():
     name = session.get('name', None)
     score = session.get('score', None)
-    return render_template('result.html', name=name, score=score)
+    best_score = get_max_score()
+    return render_template('result.html', name=name, score=score, best_score=best_score)
 
 
 if __name__ == '__main__':

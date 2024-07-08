@@ -4,27 +4,54 @@
     <meta charset="UTF-8">
     <title>Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            padding: 50px;
+        }
+    </style>
 </head>
 <body>
     <h1>Quiz</h1>
-    <form action="{{ url_for('submit') }}" method="post">
+    <div class="row">
+        <div class="col-8">
+            <form action="{{ url_for('submit') }}" method="post">
         <p>Question 1: What is your name?</p>
         <input type="text" name="name" required>
-
-        <p>Question 2: What is your favorite color?</p>
-        <input type="radio" name="color" value="Red">Red
-        <input type="radio" name="color" value="Blue">Blue
-        <input type="radio" name="color" value="Green">Green
-
-        <p>Question 3: What is your favorite animal?</p>
-        <input type="radio" name="animal" value="Dog">Dog
-        <input type="radio" name="animal" value="Cat">Cat
-        <input type="radio" name="animal" value="Parrot">Parrot
-
-        <p>Question 4: Describe your hobbies or interests:</p>
-        <textarea name="hobbies" rows="4" cols="50"></textarea>
-
+        <hr>
+        <p>Question 2: What is the main purpose of the __init__ method in Python classes?</p>
+        <label><input type="radio" name="first" value="1">To initialize the class attributes and set up initial state.</label><br>
+        <label><input type="radio" name="first" value="2">To destroy the object when it's no longer needed.</label><br>
+        <label><input type="radio" name="first" value="3">To perform addition operations within the class.</label><br>
+        <label><input type="radio" name="first" value="4">To compare two objects of the same class.</label><br>
+        <hr>
+        <p>Question 3: What are some popular Python libraries used for data visualization, machine learning?</p>
+        <label><input type="radio" name="second" value="1">Matplotlib</label><br>
+        <label><input type="radio" name="second" value="2">Scikit-learn</label><br>
+        <label><input type="radio" name="second" value="3">Requests</label><br>
+        <label><input type="radio" name="second" value="4">BeautifulSoup</label><br>
+        <hr>
+        <p>Question 4: What is the purpose of a neural network in AI?</p>
+        <label><input type="radio" name="third" value="1">To store data in tabular form.</label><br>
+        <label><input type="radio" name="third" value="2">To visualize data in graphical format.</label><br>
+        <label><input type="radio" name="third" value="3">To simulate the human brain and recognize patterns in data.</label><br>
+        <label><input type="radio" name="third" value="4">To handle HTTP requests and responses.</label><br>
+        <br>
         <button type="submit">Submit Answers</button>
     </form>
+        </div>
+        <div class="col-4">
+            <p>Best Score: {{ max_score }}</p>
+        </div>
+
+    </div>
+
 </body>
+<footer>
+
+    Author: Berkan Şems
+
+
+</footer>
 </html>
